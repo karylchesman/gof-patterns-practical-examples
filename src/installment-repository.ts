@@ -7,8 +7,9 @@ export interface InstallmentRepository {
 
 export class InstallmentRepositoryMemory implements InstallmentRepository {
   installments: Installment[];
+  static instance: InstallmentRepository;
 
-  constructor() {
+  private constructor() {
     this.installments = [];
   }
 
@@ -20,5 +21,12 @@ export class InstallmentRepositoryMemory implements InstallmentRepository {
     return this.installments.filter(
       (installment) => installment.loan_id === loan_id
     );
+  }
+
+  static getInstance() {
+    if (!InstallmentRepositoryMemory.instance) {
+      InstallmentRepositoryMemory.instance = new InstallmentRepositoryMemory();
+    }
+    return InstallmentRepositoryMemory.instance;
   }
 }

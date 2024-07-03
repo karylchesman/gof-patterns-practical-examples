@@ -7,8 +7,9 @@ export interface LoanRepository {
 
 export class LoanRepositoryMemory implements LoanRepository {
   loans: Loan[];
+  static instance: LoanRepository;
 
-  constructor() {
+  private constructor() {
     this.loans = [];
   }
 
@@ -20,5 +21,12 @@ export class LoanRepositoryMemory implements LoanRepository {
     const loan = this.loans.find((loan) => loan.loan_id === loan_id);
     if (!loan) throw new Error("Loan not found");
     return loan;
+  }
+
+  static getInstance() {
+    if (!LoanRepositoryMemory.instance) {
+      LoanRepositoryMemory.instance = new LoanRepositoryMemory();
+    }
+    return LoanRepositoryMemory.instance;
   }
 }

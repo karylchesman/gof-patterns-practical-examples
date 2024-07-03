@@ -1,11 +1,16 @@
 import { InstallmentRepository } from "./installment-repository";
 import { LoanRepository } from "./loan-repository";
+import { RepositoryFactory } from "./repository-factory";
 
 export class GetLoan {
-  constructor(
-    readonly loanRepository: LoanRepository,
-    readonly installmentRepository: InstallmentRepository
-  ) {}
+  private loanRepository: LoanRepository;
+  private installmentRepository: InstallmentRepository;
+
+  constructor(readonly repositoryFactory: RepositoryFactory) {
+    this.loanRepository = repositoryFactory.createLoanRepository();
+    this.installmentRepository =
+      repositoryFactory.createInstallmentRepository();
+  }
 
   async execute(input: Input): Promise<Output> {
     const loan = await this.loanRepository.getById(input.loan_id);
