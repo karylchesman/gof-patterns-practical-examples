@@ -1,8 +1,5 @@
-import {
-  PRICEInstallmentCalculator,
-  SACInstallmentCalculator,
-} from "./installment-calculator";
-import { MortgageLoan } from "./loan";
+import { PRICEInstallmentCalculator, SACInstallmentCalculator } from "../installment-calculator";
+import { MortgageLoan } from "../loan";
 
 test("Should calculate the installments with SAC", () => {
   const installment_calculator = new SACInstallmentCalculator();

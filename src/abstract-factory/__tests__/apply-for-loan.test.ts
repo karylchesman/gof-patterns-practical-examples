@@ -1,15 +1,12 @@
-import { ApplyForLoan } from "./apply-for-loan";
-import { GetLoan } from "./get-loan";
-import { MortgageLoanfactory } from "./loan-factory";
-import { RepositoryMemoryFactory } from "./repository-factory";
+import { ApplyForLoan } from "../apply-for-loan";
+import { GetLoan } from "../get-loan";
+import { MortgageLoanfactory } from "../loan-factory";
+import { RepositoryMemoryFactory } from "../repository-factory";
 
 test("should request a mortgage loan", async () => {
   const repository_factory = new RepositoryMemoryFactory();
   const mortgage_loan_factory = new MortgageLoanfactory();
-  const apply_for_loan = new ApplyForLoan(
-    repository_factory,
-    mortgage_loan_factory
-  );
+  const apply_for_loan = new ApplyForLoan(repository_factory, mortgage_loan_factory);
   const input = {
     amount: 100_000,
     income: 10_000,
